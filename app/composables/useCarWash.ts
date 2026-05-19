@@ -13,7 +13,7 @@ type Actuators = {
 export type CarWashState = {
     status: 'wait' | 'washing' | 'finished' | 'error'
     phase: 'wait' | 'pre-wash' | 'soap' | 'brushes' | 'rinse' | 'drying'
-    progres: number
+    progress: number
     vehiclesServed: number
     cycleTimeSeconds: number
     actuators: Actuators
@@ -24,7 +24,7 @@ export type CarWashState = {
 const defaultState: CarWashState = {
     status: 'wait',
     phase: 'wait',
-    progres: 0,
+    progress: 0,
     vehiclesServed: 0,
     cycleTimeSeconds: 0,
     actuators: {
@@ -78,7 +78,7 @@ export const useCarWash = () => {
         const demoState: CarWashState = {
             status: 'washing',
             phase: 'soap',
-            progres: 42,
+            progress: 42,
             vehiclesServed: 3,
             cycleTimeSeconds: 38,
             actuators: {
