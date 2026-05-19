@@ -19,22 +19,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <main>
-    <h1>CarWash Arqui 2026</h1>
-
-    <p v-if="loading">Conectando con Firebase...</p>
-    <p v-else-if="error">Error: {{ error }}</p>
-
-    <section v-else>
-      <p>Estado: {{ current.status }}</p>
-      <p>Fase: {{ current.phase }}</p>
-      <p>Progreso: {{ current.progres }}%</p>
-      <p>Vehículos atendidos: {{ current.vehiclesServed }}</p>
-      <p>Tiempo ciclo: {{ current.cycleTimeSeconds }}s</p>
-
-      <button @click="sendDemoState">
-        Enviar dato demo
-      </button>
-    </section>
-  </main>
+  <h1 class="text-3xl font-bold underline bg-gray-200 p-4">
+    Hello world!
+  </h1>
 </template>
