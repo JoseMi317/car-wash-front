@@ -4,17 +4,25 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
+    "build:firebase": "nuxt build --preset=firebase",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
+    "postbuild": "node scripts/prepare-firebase-env.mjs",
+    "deploy": "npm run build:firebase && node scripts/prepare-firebase-env.mjs && firebase deploy --only functions:server,hosting",
+    "emulators": "npm run build:firebase && node scripts/prepare-firebase-env.mjs && firebase emulators:start",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",
     "firebase": "^12.13.0",
+    "firebase-admin": "^13.10.0",
     "nuxt": "^4.4.6",
     "tailwindcss": "^4.3.0",
     "vue": "^3.5.34",
     "vue-router": "^5.0.7"
+  },
+  "devDependencies": {
+    "firebase-tools": "^15.18.0"
   }
 }

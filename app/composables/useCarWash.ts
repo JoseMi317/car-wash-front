@@ -2,11 +2,8 @@ import type { Database } from 'firebase/database'
 import {
   limitToLast,
   onValue,
-  push,
   query,
-  ref as dbRef,
-  serverTimestamp,
-  set
+  ref as dbRef
 } from 'firebase/database'
 
 type Actuators = {
@@ -108,44 +105,6 @@ export const useCarWash = () => {
     )
   }
 
-  const updateCurrentState = async (payload: Partial<CarWashState>) => {
-    await set(dbRef(database, 'carwash/current'), {
-      ...current.value,
-      ...payload,
-      updatedAt: Date.now()
-    })
-  }
-
-  const sendDemoState = async () => {
-    const demoState: CarWashState = {
-      status: 'washing',
-      phase: 'soap',
-      progress: 42,
-      vehiclesServed: 3,
-      cycleTimeSeconds: 38,
-      actuators: {
-        band: true,
-        water: false,
-        soap: true,
-        brushes: false,
-        drying: false,
-        finish: false
-      },
-      error: null,
-      updatedAt: Date.now()
-    }
-
-    await set(dbRef(database, 'carwash/current'), demoState)
-
-    await push(dbRef(database, 'carwash/history'), {
-      event: 'demo_state_sent',
-      phase: demoState.phase,
-      status: demoState.status,
-      cycleTimeSeconds: demoState.cycleTimeSeconds,
-      createdAt: serverTimestamp()
-    })
-  }
-
   return {
     current,
     history,
@@ -153,8 +112,6 @@ export const useCarWash = () => {
     historyLoading,
     error,
     listenCurrentState,
-    listenHistory,
-    updateCurrentState,
-    sendDemoState
+    listenHistory
   }
 }
